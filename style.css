@@ -1,20 +1,18 @@
-body {
-  font-family: sans-serif;
-  text-align: center;
-  margin-top: 50px;
-  background-color: #e0f7fa;
-}
+const kombinacje = {
+  'Ogień+Woda': 'Para',
+  'Woda+Ziemia': 'Błoto',
+  'Powietrze+Ogień': 'Dym',
+  'Ziemia+Ogień': 'Lawa',
+  'Woda+Powietrze': 'Chmura'
+};
 
-button {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #00796b;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
+function polacz() {
+  const el1 = document.getElementById('element1').value;
+  const el2 = document.getElementById('element2').value;
 
-button:hover {
-  background-color: #004d40;
+  const klucz1 = el1 + '+' + el2;
+  const klucz2 = el2 + '+' + el1;
+
+  const wynik = kombinacje[klucz1] || kombinacje[klucz2] || 'Nic nie powstało 😅';
+  document.getElementById('wynik').innerText = wynik;
 }
