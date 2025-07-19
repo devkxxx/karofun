@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Karol.fun – Infinite Craft</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🧪 Infinite Craft (Karol)</h1>
+  <p>Wybierz dwa elementy, aby je połączyć:</p>
+
+  <select id="element1">
+    <option>Ogień</option>
+    <option>Woda</option>
+    <option>Ziemia</option>
+    <option>Powietrze</option>
+  </select>
+
+  <select id="element2">
+    <option>Ogień</option>
+    <option>Woda</option>
+    <option>Ziemia</option>
+    <option>Powietrze</option>
+  </select>
+
+  <button onclick="polacz()">Połącz</button>
+
+  <h2>🔍 Wynik: <span id="wynik">-</span></h2>
+
+  <footer>
+    <hr>
+    <p>Kontakt: <a href="mailto:karoldeveloper11@int.pl">karoldeveloper11@int.pl</a></p>
+  </footer>
+
+  <script>
+    const kombinacje = {
+      'Ogień+Woda': 'Para',
+      'Woda+Ziemia': 'Błoto',
+      'Powietrze+Ogień': 'Dym',
+      'Ziemia+Ogień': 'Lawa',
+      'Woda+Powietrze': 'Chmura'
+    };
+
+    function polacz() {
+      const el1 = document.getElementById('element1').value;
+      const el2 = document.getElementById('element2').value;
+
+      const klucz1 = el1 + '+' + el2;
+      const klucz2 = el2 + '+' + el1;
+
+      const wynik = kombinacje[klucz1] || kombinacje[klucz2] || 'Nic nie powstało 😅';
+      document.getElementById('wynik').innerText = wynik;
+    }
+  </script>
+</body>
+</html>
