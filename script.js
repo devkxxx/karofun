@@ -1,10 +1,18 @@
-function powiedzDowcip() {
-  const dowcipy = [
-    "Dlaczego komputer był smutny? Bo miał za dużo problemów!",
-    "Co mówi HTML do CSS? Masz styl!",
-    "Co robi programista, gdy mu się nudzi? Pisze własnego Snake’a!"
-  ];
+const kombinacje = {
+  'Ogień+Woda': 'Para',
+  'Woda+Ziemia': 'Błoto',
+  'Powietrze+Ogień': 'Dym',
+  'Ziemia+Ogień': 'Lawa',
+  'Woda+Powietrze': 'Chmura'
+};
 
-  const losowy = Math.floor(Math.random() * dowcipy.length);
-  document.getElementById("dowcip").innerText = dowcipy[losowy];
+function polacz() {
+  const el1 = document.getElementById('element1').value;
+  const el2 = document.getElementById('element2').value;
+
+  const klucz1 = el1 + '+' + el2;
+  const klucz2 = el2 + '+' + el1;
+
+  const wynik = kombinacje[klucz1] || kombinacje[klucz2] || 'Nic nie powstało 😅';
+  document.getElementById('wynik').innerText = wynik;
 }
