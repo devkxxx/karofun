@@ -1,4 +1,3 @@
-
 async function combine() {
   const first = document.getElementById('first').value;
   const second = document.getElementById('second').value;
@@ -12,7 +11,17 @@ async function combine() {
   resultBox.textContent = "Łączenie...";
 
   try {
-    const response = await fetch(`https://neal.fun/api/infinite-craft/pair?first=${encodeURIComponent(first)}&second=${encodeURIComponent(second)}`);
+    const response = await fetch('https://b05d16f4-d287-4073-93c5-f5d22ce28bcd-00-3kzopudyxjpef.janeway.replit.dev/pair', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        first: first,
+        second: second
+      })
+    });
+
     const data = await response.json();
     resultBox.textContent = `🔀 ${first} + ${second} = ${data.result}`;
   } catch (error) {
