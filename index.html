@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>KaroMeter (wersja robocza)</title>
+  <style>
+    body { font-family: sans-serif; margin: 20px; text-align: center; }
+    #count { font-size: 3em; margin: 20px; }
+    #goalSelect, button { font-size: 1.2em; padding: 10px; margin: 5px; }
+    .highlight { color: green; }
+  </style>
+</head>
+<body>
+  <h1>KaroMeter (wersja robocza)</h1>
+  <div>
+    <label for="goalSelect">Wybierz dzienny cel kroków:</label><br>
+    <select id="goalSelect">
+      <option value="3000">3000</option>
+      <option value="5000" selected>5000</option>
+      <option value="10000">10000</option>
+    </select>
+  </div>
+  <div id="count">🦶 0</div>
+  <button id="resetBtn">Resetuj</button>
+
+  <script>
+    let count = parseInt(localStorage.getItem('steps') || '0');
+    let goal = parseInt(localStorage.getItem('goal') || '5000');
+    const countEl = document.getElementById('count');
+    const goalSelect = document.getElementById('goalSelect');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function updateDisplay() {
+      countEl.textContent = `🦶 ${count}`;
+      if (count >= goal) {
+        countEl.classList.add('highlight');
+      } else {
+        countEl.classList.remove('highlight');
+      }
+    }
+
+    goalSelect.value = goal;
+    goalSelect.addEventListener('change', () => {
+      goal = parseInt(goalSelect.value);
+      localStorage.setItem('goal', goal);
+      updateDisplay();
+    });
+
+    document.body.addEventListener('click', () => {
+      count++;
+      localStorage.setItem('steps', count);
+      updateDisplay();
+    });
+
+    resetBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (confirm('Na pewno chcesz zresetować?')) {
+        count = 0;
+        localStorage.setItem('steps', count);
+        updateDisplay();
+      }
+    });
+
+    updateDisplay();
+  </script>
+</body>
+</html>
