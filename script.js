@@ -23,8 +23,16 @@ async function combine() {
     });
 
     const data = await response.json();
-    resultBox.textContent = `🔀 ${first} + ${second} = ${data.result}`;
+
+    if (data.result) {
+      resultBox.textContent = `🔀 ${first} + ${second} = ${data.result}`;
+    } else {
+      resultBox.textContent = `❌ Nie znaleziono kombinacji (brak odpowiedzi)`;
+      console.log("Błąd odpowiedzi:", data);
+    }
+
   } catch (error) {
     resultBox.textContent = "Błąd połączenia z AI 😢";
+    console.error("Błąd:", error);
   }
 }
