@@ -3,11 +3,17 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Infinite Craft</title>
+  <title>Infinite Craft (AI)</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Infinite Craft</h1>
-  <p>Gra ładowana... (tutaj będzie Twoja wersja z AI)</p>
-  <p><a href="index.html">← Powrót</a></p>
+  <h1>🧪 Infinite Craft (AI)</h1>
+  <p>Podaj dwa elementy, które chcesz połączyć:</p>
+  <input type="text" id="first" placeholder="np. Ogień">
+  <input type="text" id="second" placeholder="np. Woda">
+  <button onclick="combine()">Połącz</button>
+  <p id="result">🔎 Wynik pojawi się tutaj</p>
+  <p><a href="index.html">← Powrót do strony głównej</a></p>
+  <script src="script.js"></script>
 </body>
 </html>
