@@ -1,0 +1,91 @@
+<html><head>
+    <title>line05x6 - csh.bz - chris shier</title>
+    <!-- chris shier, noisia@gmail.com, http://csh.bz -->
+    <!-- thank you timb -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <link rel="stylesheet" type="text/css" href="./css/pair.css">
+    <link rel="icon" href="http://csh.bz/favicon.ico">
+    <link rel="image_src" href="./img/05x601.png">
+    <meta property="og:image" content="./img/05x601.png">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<canvas id="canvas" height="921" width="1311">try this in a browser that supports the canvas tag</canvas>
+
+<script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script type="text/javascript" src="./js/window.js"></script>
+<script type="text/javascript" src="./js/mouse.js"></script>
+<script type="text/javascript" src="./js/canvas.js"></script>
+<script type="text/javascript">
+
+function clear(){
+  ctx.clearRect(0,0,cw,ch);
+}
+function touchClear(){
+  window.ontouchstart = clear;
+}
+// this is here because all my js was being cached forever and i aint got no version control okay?
+var hue;
+function linee(width) {
+  ctx.lineCap = "round";
+  ctx.lineJoin = "miter";
+  ctx.lineWidth = width||2;
+  ctx.beginPath();
+  for ( var i = 64; i > 0; i--) {
+    ctx.moveTo(Mouse.xA[i-1],Mouse.yA[i-1]);
+    ctx.lineTo(Mouse.xA[i],Mouse.yA[i]);
+      var a = (Mouse.xA[i] - Mouse.xA[i-1])||1;
+      var b = (Mouse.yA[i] - Mouse.yA[i-1])||1;
+      hue = (-time/6) - (i*2) + (hypotenuse(a,b)*6) - aRandomNumber;
+      ctx.strokeStyle = hsla(hue,100,50,1);
+      ctx.lineWidth = Math.max(width - (hypotenuse(a,b)/2), 2);
+    ctx.stroke();
+    ctx.beginPath();
+  }
+}
+
+function animloop() {
+  window.requestAnimFrame(animloop);
+  imageSmoothing(false);
+  timer();
+
+  if (Mouse.clicks % 2 == 1 ){
+    decay2(0,0,2,0);
+    decay2(0, 0, -8, Math.PI + Mouse.clicks)
+  } else {
+    decay2(0,0,2,0);
+    decay2(0, 0, -32,Math.PI + Mouse.clicks + 1)
+  }
+
+  if ( (Mouse.x <= 20 && Mouse.y <= 20)  /*top left*/ ||
+   (Mouse.x >= cw-20 && Mouse.y <= 20)  /*top right*/ ||
+   (Mouse.x >= cw-20 && Mouse.y >= ch-20)  /*bottom right*/ ||
+   (Mouse.x <= 20 && Mouse.y >= ch-20)  /* bottom left*/ ) {
+    clearCanvas(0.1);
+   }
+
+  if (Mouse.x !== -1 && Mouse.y !== -1) {
+    linee(12);
+  }
+}
+animloop();
+
+</script>
+
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-3889624-4']);
+    _gaq.push(['_trackPageview']);
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+</body></html>
